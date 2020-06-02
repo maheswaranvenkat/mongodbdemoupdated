@@ -18,18 +18,18 @@ import static org.springframework.data.mongodb.core.query.Meta.CursorOption.SLAV
 public interface LegoSetRepository extends MongoRepository<LegoSet, String>, QuerydslPredicateExecutor<LegoSet> {
     Collection<LegoSet> findAllByThemeContains(String theme, Sort sort);
     Collection<LegoSet> findAllByDifficultyAndNameStartsWith(LegoSetDifficulty difficulty, String name);
-    @Meta(comment = "find by name", flags = { SLAVE_OK })
+    @Meta(comment = "find by All", flags = { SLAVE_OK })
     Collection<LegoSet> findAllBy(TextCriteria textCriteria);
 
-    @Meta(comment = "find by name", flags = { SLAVE_OK })
+    @Meta(comment = "find by Delivery Price Less Than 70", flags = { SLAVE_OK })
     @Query("{'delivery.deliveryFee' : {$lt : ?0}}")
     Collection<LegoSet> findAllByDeliveryPriceLessThan(int price);
 
-    @Meta(comment = "find by name", flags = { SLAVE_OK })
+    @Meta(comment = "find by All Great Reviews", flags = { SLAVE_OK })
     @Query("{'reviews.rating' : {$eq : 10}}")
     Collection<LegoSet> findAllByGreatReviews();
 
-    @Meta(comment = "find by name", flags = { SLAVE_OK })
+    @Meta(comment = "find by name PaymentOption Id", flags = { SLAVE_OK })
     @Query("{'paymentOptions.id' : ?0}")
     Collection<LegoSet> findByPaymentOptionId(String id);
 }

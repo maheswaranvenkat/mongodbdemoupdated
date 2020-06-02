@@ -16,6 +16,7 @@ import static org.springframework.data.mongodb.core.query.Meta.CursorOption.SLAV
 
 @Repository
 public interface LegoSetRepository extends MongoRepository<LegoSet, String>, QuerydslPredicateExecutor<LegoSet> {
+    @Meta(comment = "find All By Theme", flags = { SLAVE_OK })
     Collection<LegoSet> findAllByThemeContains(String theme, Sort sort);
     Collection<LegoSet> findAllByDifficultyAndNameStartsWith(LegoSetDifficulty difficulty, String name);
     @Meta(comment = "find by All", flags = { SLAVE_OK })
